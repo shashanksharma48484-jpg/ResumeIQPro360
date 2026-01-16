@@ -2,62 +2,37 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>ResumeIQ Pro 360° - ATS Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ResumeIQ Pro 360° - Redirecting...</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { 
-      width: 100%; height: 100vh; overflow: hidden; 
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      user-select: none;
+    body {
+      margin: 0; padding: 40px; 
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      text-align: center; background: #667eea; color: white;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
     }
-    iframe {
-      position: fixed; top: 0; left: 0; 
-      width: 100vw; height: 100vh; 
-      border: none; background: white;
+    .loading { font-size: 24px; }
+    .spinner { 
+      border: 4px solid rgba(255,255,255,0.3); 
+      border-top: 4px solid white; 
+      border-radius: 50%; width: 40px; height: 40px; 
+      animation: spin 1s linear infinite; margin: 20px auto;
     }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-  <iframe 
-    src="https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec"
-    width="100%" height="100%"
-    allowfullscreen="true"
-    allow="fullscreen *; camera *; microphone *; geolocation *; payment *"
-    sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups allow-downloads"
-    scrolling="yes"
-    seamless="seamless">
-  </iframe>
+  <div>
+    <div class="spinner"></div>
+    <div class="loading">Opening ResumeIQ Pro 360°...</div>
+    <div style="font-size: 14px; margin-top: 20px;">
+      If not redirected: <a href="https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec" style="color: white;">Click Here</a>
+    </div>
+  </div>
 
   <script>
-    const iframe = document.querySelector('iframe');
-
-    // Remove all touch interference
-    ['touchstart', 'touchmove', 'touchend', 'touchcancel'].forEach(event => {
-      iframe.addEventListener(event, e => e.stopPropagation(), { passive: true });
-    });
-
-    // Focus iframe after load
-    iframe.addEventListener('load', () => {
-      setTimeout(() => {
-        iframe.contentWindow?.focus?.();
-        iframe.focus();
-      }, 500);
-    });
-
-    // Fullscreen with retry
-    function tryFullscreen() {
-      const methods = [
-        iframe.requestFullscreen?.(),
-        iframe.webkitRequestFullscreen?.(),
-        iframe.mozRequestFullScreen?.(),
-        iframe.msRequestFullscreen?.()
-      ];
-    }
-
-    window.addEventListener('load', () => setTimeout(tryFullscreen, 2000));
-    iframe.addEventListener('click', tryFullscreen);
+    // Instant redirect (no iframe)
+    window.location.href = "https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec";
   </script>
 </body>
 </html>
