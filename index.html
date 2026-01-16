@@ -2,76 +2,62 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <title>ResumeIQ Pro 360°</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ResumeIQ Pro 360° - ATS Analysis</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { 
-      height: 100vh; width: 100vw; 
-      overflow: hidden; touch-action: none;
+      width: 100%; height: 100vh; overflow: hidden; 
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
     }
     iframe {
       position: fixed; top: 0; left: 0; 
       width: 100vw; height: 100vh; 
-      border: none; 
-      touch-action: manipulation;
-      -webkit-overflow-scrolling: touch;
+      border: none; background: white;
     }
   </style>
 </head>
 <body>
   <iframe 
     src="https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec"
+    width="100%" height="100%"
     allowfullscreen="true"
     allow="fullscreen *; camera *; microphone *; geolocation *; payment *"
-    sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation"
-    webkitallowfullscreen mozallowfullscreen msallowfullscreen>
+    sandbox="allow-forms allow-scripts allow-same-origin allow-top-navigation-by-user-activation allow-popups allow-downloads"
+    scrolling="yes"
+    seamless="seamless">
   </iframe>
 
   <script>
-    let fullscreenRequested = false;
-    
-    window.addEventListener('load', () => {
-      const iframe = document.querySelector('iframe');
-      
-      // Touch events for mobile
-      iframe.addEventListener('touchstart', handleTouch, { passive: false });
-      iframe.addEventListener('touchmove', handleTouch, { passive: false });
-      iframe.addEventListener('touchend', handleTouch, { passive: false });
-      
-      // Fullscreen after load
-      setTimeout(() => requestFullscreen(iframe), 2000);
+    const iframe = document.querySelector('iframe');
+
+    // Remove all touch interference
+    ['touchstart', 'touchmove', 'touchend', 'touchcancel'].forEach(event => {
+      iframe.addEventListener(event, e => e.stopPropagation(), { passive: true });
     });
 
-    function handleTouch(e) {
-      e.stopPropagation();
-    }
+    // Focus iframe after load
+    iframe.addEventListener('load', () => {
+      setTimeout(() => {
+        iframe.contentWindow?.focus?.();
+        iframe.focus();
+      }, 500);
+    });
 
-    function requestFullscreen(iframe) {
-      if (fullscreenRequested) return;
-      fullscreenRequested = true;
-      
+    // Fullscreen with retry
+    function tryFullscreen() {
       const methods = [
-        iframe.requestFullscreen.bind(iframe),
-        iframe.webkitRequestFullscreen.bind(iframe),
-        iframe.mozRequestFullScreen.bind(iframe),
-        iframe.msRequestFullscreen.bind(iframe)
+        iframe.requestFullscreen?.(),
+        iframe.webkitRequestFullscreen?.(),
+        iframe.mozRequestFullScreen?.(),
+        iframe.msRequestFullscreen?.()
       ];
-      
-      methods.forEach(method => {
-        method().catch(() => {});
-      });
     }
 
-    // Prevent zoom on double-tap
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', (e) => {
-      const now = Date.now();
-      if (now - lastTouchEnd <= 300) {
-        e.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, false);
+    window.addEventListener('load', () => setTimeout(tryFullscreen, 2000));
+    iframe.addEventListener('click', tryFullscreen);
   </script>
 </body>
 </html>
