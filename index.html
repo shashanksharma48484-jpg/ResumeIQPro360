@@ -5,11 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResumeIQ Pro 360°</title>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}html,body{width:100vw;height:100vh;overflow:hidden}
-    iframe{width:100%;height:100%;border:none;display:block}
+    body{font-family:system-ui,sans-serif;background:linear-gradient(135deg,#1a73e8,#0d47a1);color:white;text-align:center;padding:40px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+    .logo{font-size:clamp(2rem,8vw,4rem);font-weight:800;margin-bottom:1rem}
+    .subtitle{font-size:clamp(1rem,4vw,1.5rem);margin-bottom:2rem;opacity:0.95}
+    .btn{display:inline-block;background:linear-gradient(135deg,#10b981,#059669);color:white;padding:18px 45px;border-radius:50px;text-decoration:none;font-weight:700;font-size:clamp(1rem,3vw,1.2rem);box-shadow:0 10px 30px rgba(16,185,129,0.4);transition:all 0.3s}
+    .btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(16,185,129,0.5)}
+    .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin:20px auto;display:none}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:480px){.btn{padding:16px 35px}}
   </style>
 </head>
 <body>
-<iframe src="https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec" scrolling="yes" frameborder="0" sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-downloads"></iframe>
+  <div class="spinner" id="spinner"></div>
+  <h1 class="logo">ResumeIQ Pro 360°</h1>
+  <p class="subtitle">Enterprise ATS Resume Analyzer</p>
+  <a href="https://script.google.com/macros/s/YOUR_APPS_SCRIPT_URL_HERE/exec" class="btn" id="launchBtn">Launch Analyzer</a>
+  <p style="margin-top:2rem;font-size:0.9rem;opacity:0.8">Opening professional analysis tool...</p>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('spinner').style.display = 'block';
+      document.getElementById('launchBtn').innerHTML = 'Loading...';
+      window.location.href = 'https://script.google.com/macros/s/YOUR_APPS_SCRIPT_URL_HERE/exec';
+    }, 1500);
+  </script>
 </body>
 </html>
