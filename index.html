@@ -1,26 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ResumeIQ Pro 360°</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>ResumeIQ Pro 360° - ATS Analysis</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { 
+      width: 100%; height: 100vh; overflow: hidden; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    iframe {
+      position: fixed; top: 0; left: 0; 
+      width: 100vw; height: 100vh; 
+      border: none; background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .loading {
+      position: fixed; top: 50%; left: 50%; 
+      transform: translate(-50%, -50%);
+      font-family: Arial, sans-serif;
+      color: white; font-size: 18px;
+      z-index: 1000;
+    }
+  </style>
 </head>
 <body>
+  <div class="loading">Loading ResumeIQ Pro 360°... <span style="animation: pulse 1s infinite;">⏳</span></div>
+  
   <iframe 
+    id="resumeIframe"
     src="https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec"
-    width="100%"
-    height="100%"
     allowfullscreen="true"
-    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+    allow="fullscreen *; camera *; microphone *; geolocation *"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    msallowfullscreen="true"
+    loading="lazy">
   </iframe>
 
   <script>
-    window.onload = function() {
-      document.querySelector('iframe')
-        .requestFullscreen()
-        .catch((err) => {
-          console.error('Error attempting to enable full-screen mode:', err.message);
-        });
-    };
+    const loading = document.querySelector('.loading');
+    const iframe = document.getElementById('resumeIframe');
+
+    // Hide loading after 2s
+    setTimeout(() => {
+      loading.style.display = 'none';
+    }, 2000);
+
+    // Fullscreen after iframe loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        tryFullscreen(iframe);
+      }, 2000); // Wait for iframe content
+    });
+
+    // Retry fullscreen on click/resize
+    iframe.addEventListener('load', () => {
+      setTimeout(() => tryFullscreen(iframe), 1000);
+    });
+
+    window.addEventListener('resize', () => {
+      setTimeout(() => {
+        iframe.style.height = '100vh';
+        if (document.fullscreenElement) return;
+        tryFullscreen(iframe);
+      }, 500);
+    });
+
+    function tryFullscreen(iframe) {
+      const attempts = [
+        () => iframe.requestFullscreen(),
+        () => iframe.webkitRequestFullscreen(),
+        () => iframe.mozRequestFullScreen(),
+        () => iframe.msRequestFullscreen()
+      ];
+
+      for (let attempt of attempts) {
+        try {
+          attempt();
+          break;
+        } catch (e) {
+          console.log('Fullscreen attempt failed:', e);
+        }
+      }
+    }
   </script>
+
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
 </body>
 </html>
-        
