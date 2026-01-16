@@ -1,33 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ResumeIQ Pro 360°</title>
-  <style>
-    body{font-family:system-ui,sans-serif;background:linear-gradient(135deg,#1a73e8,#0d47a1);color:white;text-align:center;padding:40px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-    .logo{font-size:clamp(2rem,8vw,4rem);font-weight:800;margin-bottom:1rem}
-    .subtitle{font-size:clamp(1rem,4vw,1.5rem);margin-bottom:2rem;opacity:0.95}
-    .btn{display:inline-block;background:linear-gradient(135deg,#10b981,#059669);color:white;padding:18px 45px;border-radius:50px;text-decoration:none;font-weight:700;font-size:clamp(1rem,3vw,1.2rem);box-shadow:0 10px 30px rgba(16,185,129,0.4);transition:all 0.3s}
-    .btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(16,185,129,0.5)}
-    .spinner{width:50px;height:50px;border:3px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin:20px auto;display:none}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    @media(max-width:480px){.btn{padding:16px 35px}}
-  </style>
+  <style>body{font-family:system-ui;background:linear-gradient(135deg,#1a73e8 0%,#0d47a1 100%);color:white;text-align:center;padding:5%;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column}.logo{font-size:clamp(2.5rem,10vw,5rem);font-weight:800;margin-bottom:1rem;letter-spacing:-0.05em}.subtitle{font-size:clamp(1.1rem,4vw,1.5rem);margin-bottom:2.5rem;opacity:0.95;max-width:28rem;line-height:1.4}.install-badge{display:inline-flex;align-items:center;background:rgba(255,255,255,0.2);backdrop-filter:blur(20px);padding:12px 24px;border-radius:50px;font-size:1rem;margin:1rem 0}.btn{display:inline-block;background:linear-gradient(135deg,#10b981,#059669);color:white;padding:18px 45px;border-radius:50px;text-decoration:none;font-weight:700;font-size:clamp(1.1rem,4vw,1.3rem);box-shadow:0 12px 35px rgba(16,185,129,0.4);transition:all 0.3s}@media(max-width:480px){.btn{padding:16px 32px}}</style>
 </head>
 <body>
-  <div class="spinner" id="spinner"></div>
   <h1 class="logo">ResumeIQ Pro 360°</h1>
-  <p class="subtitle">Enterprise ATS Resume Analyzer</p>
-  <a href="https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec" class="btn" id="launchBtn">Launch Analyzer</a>
-  <p style="margin-top:2rem;font-size:0.9rem;opacity:0.8">Opening professional analysis tool...</p>
-
-  <script>
-    setTimeout(() => {
-      document.getElementById('spinner').style.display = 'block';
-      document.getElementById('launchBtn').innerHTML = 'Loading...';
-      window.location.href = 'https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec';
-    }, 1500);
-  </script>
+  <p class="subtitle">Enterprise-Grade ATS Resume Analysis<br>Install for instant access</p>
+  <div class="install-badge">📱 Add to Home Screen (Tap menu → Install)</div>
+  <a href="https://script.google.com/macros/s/AKfycbyPk-YU8SzGPl-9oFMQfDFoeGMpU13fKH-OWZYQwxbmEkgQ4LE4PcGEBRj2lLB4y6fU/exec" class="btn">Launch App</a>
 </body>
 </html>
